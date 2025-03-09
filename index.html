@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DRISHTI provides professional video editing services including commercial edits, music videos, and wedding films. Elevate your brand with premium quality edits.">
+  <meta name="keywords" content="video editing, professional video editor, commercial editing, music video editing, wedding film editing, DRISHTI">
+  <meta name="author" content="DRISHTI">
+  <meta name="robots" content="index, follow">
+  <!-- Open Graph for SMO -->
+  <meta property="og:title" content="DRISHTI | Professional Video Editing">
+  <meta property="og:description" content="Transform your footage into compelling stories with DRISHTI's expert video editing services.">
+  <meta property="og:image" content="https://example.com/og-image.jpg">
+  <meta property="og:url" content="https://example.com">
+  <meta property="og:type" content="website">
+  <!-- Twitter Card for SMO -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DRISHTI | Professional Video Editing">
+  <meta name="twitter:description" content="Expert video editing for commercials, music videos, and weddings. Contact DRISHTI!">
+  <meta name="twitter:image" content="https://example.com/twitter-image.jpg">
+  <title>DRISHTI | Professional Video Editing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #f8f9fa;
+      --secondary: #e9ecef;
+      --accent: #f28c38;
+      --text: #212529;
+      --text-light: #6c757d;
+      --white: #ffffff;
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--accent);
+      color: var(--white);
+      border-radius: 4px;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #e07b30;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(242, 140, 56, 0.3);
+    }
+
+    .btn svg {
+      margin-left: 0.5rem;
+    }
+
+    /* Background Floating Balls */
+    .background-balls {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .ball {
+      position: absolute;
+      background-color: rgba(242, 140, 56, 0.4);
+      border-radius: 50%;
+      filter: blur(15px);
+      animation: floatBounce 8s infinite ease-in-out;
+    }
+
+    .ball:nth-child(1) { width: 60px; height: 60px; top: 10%; left: 20%; animation-delay: 0s; }
+    .ball:nth-child(2) { width: 90px; height: 90px; top: 60%; left: 70%; animation-delay: 1.5s; }
+    .ball:nth-child(3) { width: 70px; height: 70px; top: 40%; left: 40%; animation-delay: 3s; }
+    .ball:nth-child(4) { width: 80px; height: 80px; top: 80%; left: 15%; animation-delay: 4.5s; }
+    .ball:nth-child(5) { width: 50px; height: 50px; top: 25%; left: 60%; animation-delay: 6s; }
+    .ball:nth-child(6) { width: 65px; height: 65px; top: 50%; left: 85%; animation-delay: 7s; }
+
+    @keyframes floatBounce {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-20px, 30px); }
+      40% { transform: translate(25px, -25px); }
+      60% { transform: translate(-15px, 20px); }
+      80% { transform: translate(20px, -30px); }
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      background-color: rgba(248, 249, 250, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .header.hidden {
+      transform: translateY(-100%);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .logo svg {
+      margin-right: 0.5rem;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover svg {
+      transform: rotate(360deg);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      color: var(--text);
+      transition: color 0.3s ease, background-color 0.3s ease;
+      border-radius: 20px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--white);
+      background-color: var(--accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 20%, rgba(242, 140, 56, 0.1) 0%, rgba(248, 249, 250, 0) 50%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .hero-tagline::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-thumbnail {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-thumbnail img {
+      transform: scale(1.05);
+    }
+
+    .service-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      color: var(--accent);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-play-btn {
+      opacity: 1;
+    }
+
+    .service-content {
+      padding: 1.5rem;
+    }
+
+    .service-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-title svg {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .service-description {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    /* About */
+    .about-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 100px;
+      height: 100px;
+      border-top: 4px solid var(--accent);
+      border-left: 4px solid var(--accent);
+      z-index: -1;
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      border-bottom: 4px solid var(--accent);
+      border-right: 4px solid var(--accent);
+      z-index: -1;
+    }
+
+    .about-text {
+      margin-bottom: 2rem;
+    }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .skill-item svg {
+      color: var(--accent);
+      margin-right: 0.5rem;
+    }
+
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .achievement-item {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .achievement-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .achievement-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .achievement-text {
+      font-weight: 500;
+    }
+
+    /* Portfolio */
+    .portfolio {
+      position: relative;
+      padding-bottom: 0;
+    }
+
+    .portfolio.active {
+      padding-bottom: 0;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .portfolio-thumbnail {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .portfolio-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover .portfolio-thumbnail img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-title {
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-btn {
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover .portfolio-btn {
+      opacity: 1;
+    }
+
+    .portfolio-expanded {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      height: 150px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      position: relative;
+    }
+
+    .portfolio-expanded.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .expanded-tile {
+      width: 50%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .expanded-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .expanded-tile-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .expanded-tile-title {
+      color: var(--white);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .video-panel {
+      width: 50%;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: absolute;
+      right: -50%;
+      transition: right 0.5s ease;
+    }
+
+    .video-panel.active {
+      right: 0;
+    }
+
+    .video-panel video {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .close-expanded {
+      position: absolute;
+      top: -40px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .close-expanded:hover {
+      background-color: var(--accent);
+      color: var(--white);
+    }
+
+    /* Marquee */
+    .marquee-container {
+      overflow: hidden;
+      padding: 0;
+      margin-top: 1rem; /* Reduced space above marquee */
+      width: 100vw;
+      position: relative; /* Changed to relative to stay in flow */
+      left: calc(-1 * ((100vw - 100%) / 2)); /* Adjusted to fit naturally below tiles */
+    }
+
+    .portfolio.active .marquee-container {
+      margin-top: 1rem;
+    }
+
+    .marquee {
+      display: flex;
+      animation: marquee 15s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee img {
+      width: 130px;
+      height: 130px;
+      opacity: 0.5;
+      object-fit: cover;
+      margin-right: 8rem; /* Reduced margin for tighter spacing */
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Contact */
+    .contact {
+      margin-top: 1rem;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    .contact-text h4 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-text p {
+      color: var(--text-light);
+    }
+
+    .contact-form {
+      background-color: var(--white);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(242, 140, 56, 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo svg {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .footer-text {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--accent);
+      color: var(--white);
+      transform: translateY(-5px);
+    }
+
+    .footer-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-link {
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .footer-link:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid #dee2e6;
+      color: var(--text-light);
+    }
+
+    /* Loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .loader-logo svg {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .loader-bar {
+      width: 200px;
+      height: 4px;
+      background-color: var(--secondary);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loader-progress {
+      height: 100%;
+      width: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .section-title { font-size: 2rem; }
+      .hero-title { font-size: 3rem; }
+      .about-container, .contact-container { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image { order: -1; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+      .portfolio-expanded { flex-direction: column; height: auto; }
+      .expanded-tile, .video-panel { width: 100%; }
+      .video-panel { position: relative; right: 0; padding-top: 0; }
+      .expanded-tile-title { font-size: 1.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+      }
+
+      .nav-menu.active { right: 0; }
+      .mobile-menu-btn { display: block; z-index: 1002; }
+      .close-menu { position: absolute; top: 20px; right: 20px; }
+      .portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 576px) {
+      html { font-size: 14px; }
+      .section { padding: 4rem 0; }
+      .hero { height: auto; min-height: 100vh; padding: 6rem 0 4rem; }
+      .hero-title { font-size: 2.5rem; }
+      .services-grid, .skills-list, .achievements { grid-template-columns: 1fr; }
+      .marquee img { width: 80px; height: 48px; margin-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Floating Balls -->
+  <div class="background-balls">
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M7 3v18M3 7h4M3 11h4M3 15h4M17 3v18M17 7h4M17 11h4M17 15h4" />
+        </svg>
+        DRISHTI
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="logo" aria-label="DRISHTI Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M7 3v18M3 7h4M3 11h4M3 15h4M17 3v18M17 7h4M17 11h4M17 15h4" />
+        </svg>
+        DRISHTI
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="#contact" class="nav-link">Contact Us</a></li>
+          <button class="mobile-menu-btn close-menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </ul>
+        <button class="mobile-menu-btn open-menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">DRISHTI</h1>
+        <p class="hero-tagline">Stories in Every Frame</p>
+        <p class="hero-description">At Drishti, we believe that every frame holds a story waiting to be told. As a visionary production house, we bring ideas to life through stunning visuals, captivating edits, and seamless storytelling. Whether it's films, commercials, music videos, or digital content, we craft each project with creativity, precision, and passion.
+
+          Let’s turn your vision into reality—one frame at a time.</p>
+        <a href="#services" class="btn">
+          Explore Services
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section services" id="services">
+    <div class="container">
+      <h2 class="section-title">Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-thumbnail">
+            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=500" alt="Commercial & Infotainment Editing" loading="lazy">
+            <div class="service-play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="7" rx="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+              Commercial/Infotainment
+            </h3>
+            <p class="service-description">Compelling commercial edits that drive engagement.</p>
+            <a href="#portfolio" class="btn">View Examples</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-thumbnail">
+            <img src="travel.jpg" alt="Music Video Editing" loading="lazy">
+            <div class="service-play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13" />
+                <circle cx="6" cy="18" r="3" />
+                <circle cx="18" cy="16" r="3" />
+              </svg>
+              travel reels
+            </h3>
+            <p class="service-description">our reels bring their stories to life, one adventure at a time. Watch the world unfold through their eyes!"</p>
+            <a href="#portfolio" class="btn">View Examples</a>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-thumbnail">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500" alt="Wedding Film Editing" loading="lazy">
+            <div class="service-play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+              </svg>
+              Your Own Cinematics
+            </h3>
+            <p class="service-description">Whether it's personal milestones, creative expressions, or memorable moments, our reels turn your story into a cinematic masterpiece that lasts forever</p>
+            <a href="#portfolio" class="btn">View Examples</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-container">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=500" alt="Video Editor at Work" loading="lazy">
+        </div>
+        <div class="about-content">
+          <h2 class="section-title">About DRISHTI</h2>
+          <div class="about-text">
+            <p>At Drishti, we believe that every frame tells a story. As a creative video production agency, we specialize in crafting visually stunning and emotionally compelling content that resonates with audiences. Whether it's cinematic storytelling, high-impact commercial edits, or seamless corporate productions, we bring ideas to life with precision and artistry.</p>
+            <br><p>Our passion for visual excellence drives us to push creative boundaries, blending innovation with a keen eye for detail. From concept to final cut, we ensure that every project is a masterpiece—one that captivates, engages, and leaves a lasting impression.
+              </p>
+             <p>Let’s create something extraordinary together. Your vision, our expertise.</p>
+          </div>
+          <div class="skills-list">
+            <div class="skill-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Adobe Premiere Pro
+            </div>
+            <div class="skill-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              After Effects
+            </div>
+            <div class="skill-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              DaVinci Resolve
+            </div>
+            <div class="skill-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Color Grading
+            </div>
+          </div>
+          <div class="achievements">
+            <div class="achievement-item">
+              <div class="achievement-number">100%</div>
+              <div class="achievement-text">Collaborative Spirit</div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-number">200+</div>
+              <div class="achievement-text">Detail-Oriented Edits Ideas</div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-number">100%</div>
+              <div class="achievement-text">Client-Centric Approach</div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-number">100%</div>
+              <div class="achievement-text">Freshness as a Strength</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="section-title">Our Work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item" data-category="commercial" data-videos="commercial1,commercial2">
+          <div class="portfolio-thumbnail">
+            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=500" alt="Commercial Work" loading="lazy">
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-title">Commercial/Infotainment</h3>
+              <button class="btn portfolio-btn">View</button>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item" data-category="music" data-videos="music1,music2">
+          <div class="portfolio-thumbnail">
+            <img src="travel.jpg" alt="Music Videos" loading="lazy">
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-title">travel reels</h3>
+              <button class="btn portfolio-btn">View</button>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item" data-category="wedding" data-videos="wedding1,wedding2">
+          <div class="portfolio-thumbnail">
+            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=500" alt="Wedding Films" loading="lazy">
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-title">Your Own Cinematics</h3>
+              <button class="btn portfolio-btn">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-expanded">
+        <div class="expanded-tile">
+          <img src="" alt="Expanded Thumbnail">
+          <div class="expanded-tile-overlay">
+            <h3 class="expanded-tile-title"></h3>
+          </div>
+        </div>
+        <div class="video-panel">
+          <video controls src=""></video>
+          <video controls src=""></video>
+        </div>
+        <button class="close-expanded">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="marquee-container">
+        <div class="marquee">
+          <img src="capcut.png" alt="CapCut" loading="lazy">
+          <img src="clipchamp.png" alt="Clipchamp" loading="lazy">
+          <img src="DaVinci.png" alt="DaVinci Resolve" loading="lazy">
+          <img src="filmora.png" alt="Filmora" loading="lazy">
+          <img src="premiere.png" alt="Premiere Pro" loading="lazy">
+          <img src="vn.png" alt="VN" loading="lazy">
+          <img src="capcut.png" alt="CapCut" loading="lazy">
+          <img src="clipchamp.png" alt="Clipchamp" loading="lazy">
+          <img src="DaVinci.png" alt="DaVinci Resolve" loading="lazy">
+          <img src="filmora.png" alt="Filmora" loading="lazy">
+          <img src="premiere.png" alt="Premiere Pro" loading="lazy">
+          <img src="vn.png" alt="VN" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p>dadhich2004dev@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <div class="contact-text">
+              <h4>Phone</h4>
+              <p>+91 8503863642 </p>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="eba5ff25-2c7e-4ff5-8366-93b578444fd7">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" name="message" class="form-control" required></textarea>
+          </div>
+          <button type="submit" class="btn">
+            Send Message
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m22 2-7 20-4-9-9-4Z" />
+              <path d="M22 2 11 13" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <div>
+          <a href="#" class="footer-logo" aria-label="DRISHTI Home">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M7 3v18M3 7h4M3 11h4M3 15h4M17 3v18M17 7h4M17 11h4M17 15h4" />
+            </svg>
+            DRISHTI
+          </a>
+          <p class="footer-text">Professional video editing services that transform footage into compelling narratives.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home" class="footer-link">Home</a></li>
+            <li><a href="#services" class="footer-link">Services</a></li>
+            <li><a href="#about" class="footer-link">About</a></li>
+            <li><a href="#portfolio" class="footer-link">Portfolio</a></li>
+            <li><a href="#contact" class="footer-link">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">Commercial Edits</a></li>
+            <li><a href="#services" class="footer-link">Music Videos</a></li>
+            <li><a href="#services" class="footer-link">Wedding Films</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 DRISHTI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Loader Animation
+      const loader = document.querySelector('.loader');
+      const loaderProgress = document.querySelector('.loader-progress');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        loaderProgress.style.width = `${progress}%`;
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            loader.classList.add('hidden');
+            animateContent();
+          }, 300);
+        }
+      }, 100);
+
+      function animateContent() {
+        gsap.from('.logo', { opacity: 0, y: -20, duration: 1, ease: 'power3.out' });
+        gsap.from('.nav-link', { opacity: 0, y: -20, duration: 1, stagger: 0.1, ease: 'power3.out' });
+        gsap.from('.hero-title', { opacity: 0, y: 50, duration: 1, delay: 0.5, ease: 'power3.out' });
+        gsap.from('.hero-tagline', { opacity: 0, y: 50, duration: 1, delay: 0.7, ease: 'power3.out' });
+        gsap.from('.hero-description', { opacity: 0, y: 50, duration: 1, delay: 0.9, ease: 'power3.out' });
+        gsap.from('.hero .btn', { opacity: 0, y: 50, duration: 1, delay: 1.1, ease: 'power3.out' });
+      }
+
+      // Scroll Animations
+      const header = document.querySelector('.header');
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          header.classList.add('hidden');
+        } else if (currentScroll < lastScroll) {
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+
+      gsap.utils.toArray('.section-title').forEach(title => {
+        gsap.from(title, {
+          scrollTrigger: { trigger: title, start: 'top 80%' },
+          opacity: 0, y: 50, duration: 1, ease: 'power3.out'
+        });
+      });
+
+      gsap.utils.toArray('.service-card').forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: { trigger: card, start: 'top 80%' },
+          opacity: 0, y: 50, duration: 1, delay: i * 0.2, ease: 'power3.out'
+        });
+      });
+
+      gsap.from('.about-image', {
+        scrollTrigger: { trigger: '.about', start: 'top 80%' },
+        opacity: 0, x: -50, duration: 1, ease: 'power3.out'
+      });
+
+      gsap.from('.about-content', {
+        scrollTrigger: { trigger: '.about', start: 'top 80%' },
+        opacity: 0, x: 50, duration: 1, ease: 'power3.out'
+      });
+
+      gsap.utils.toArray('.portfolio-item').forEach((item, i) => {
+        gsap.from(item, {
+          scrollTrigger: { trigger: item, start: 'top 80%' },
+          opacity: 0, y: 50, duration: 1, delay: i * 0.2, ease: 'power3.out'
+        });
+      });
+
+      // Mobile Menu
+      const openMenu = document.querySelector('.open-menu');
+      const closeMenu = document.querySelector('.close-menu');
+      const navMenu = document.querySelector('.nav-menu');
+      openMenu.addEventListener('click', () => navMenu.classList.add('active'));
+      closeMenu.addEventListener('click', () => navMenu.classList.remove('active'));
+
+      // Navigation Active State
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) link.classList.add('active');
+        });
+      });
+
+      // Portfolio Expansion
+      const portfolioSection = document.querySelector('.portfolio');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      const portfolioExpanded = document.querySelector('.portfolio-expanded');
+      const expandedTile = document.querySelector('.expanded-tile img');
+      const expandedTileTitle = document.querySelector('.expanded-tile-title');
+      const videoPanel = document.querySelector('.video-panel');
+      const videoPlayers = videoPanel.querySelectorAll('video');
+      const closeExpanded = document.querySelector('.close-expanded');
+
+      const videoSources = {
+        commercial1: 'com1.mp4',
+        commercial2: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+        music1: 'travel1.mp4',
+        music2: 'travel2.mp4',
+        wedding1: 'cin1.mp4',
+        wedding2: 'cin2.mp4',
+      };
+
+      portfolioItems.forEach(item => {
+        const viewBtn = item.querySelector('.portfolio-btn');
+        viewBtn.addEventListener('click', () => {
+          const thumbnailSrc = item.querySelector('img').src;
+          const tileTitle = item.querySelector('.portfolio-title').textContent;
+          const videos = item.getAttribute('data-videos').split(',');
+
+          expandedTile.src = thumbnailSrc;
+          expandedTileTitle.textContent = tileTitle;
+          videoPlayers[0].src = videoSources[videos[0]];
+          videoPlayers[1].src = videoSources[videos[1]];
+
+          portfolioSection.classList.add('active');
+          portfolioExpanded.classList.add('active');
+          document.querySelector('.portfolio-grid').style.display = 'none';
+          gsap.to(portfolioExpanded, { opacity: 1, height: '500px', duration: 0.6, ease: 'power3.out' });
+          gsap.to(videoPanel, {
+            right: '0', duration: 0.6, ease: 'power3.out', onComplete: () => {
+              videoPanel.classList.add('active');
+              videoPlayers.forEach(video => video.load());
+            }
+          });
+        });
+      });
+
+      closeExpanded.addEventListener('click', () => {
+        gsap.to(portfolioExpanded, {
+          opacity: 0, height: 0, duration: 0.6, ease: 'power3.in', onComplete: () => {
+            portfolioSection.classList.remove('active');
+            portfolioExpanded.classList.remove('active');
+            document.querySelector('.portfolio-grid').style.display = 'grid';
+            videoPlayers.forEach(video => video.pause());
+          }
+        });
+        gsap.to(videoPanel, { right: '-50%', duration: 0.6, ease: 'power3.in' });
+      });
+
+      // Service Play Buttons
+      document.querySelectorAll('.service-play-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const thumbnailSrc = btn.parentElement.querySelector('img').src;
+          const title = btn.parentElement.nextElementSibling.querySelector('.service-title').textContent;
+          const videoId = title.trim().toLowerCase().replace(' ', '') + '1';
+
+          expandedTile.src = thumbnailSrc;
+          expandedTileTitle.textContent = title;
+          videoPlayers[0].src = videoSources[videoId];
+          videoPlayers[1].src = videoSources[videoId.replace('1', '2')];
+
+          portfolioSection.classList.add('active');
+          portfolioExpanded.classList.add('active');
+          document.querySelector('.portfolio-grid').style.display = 'none';
+          gsap.to(portfolioExpanded, { opacity: 1, height: '500px', duration: 0.6, ease: 'power3.out' });
+          gsap.to(videoPanel, {
+            right: '0', duration: 0.6, ease: 'power3.out', onComplete: () => {
+              videoPanel.classList.add('active');
+              videoPlayers.forEach(video => video.load());
+            }
+          });
+        });
+      });
+
+      // Form Submission (Handled by PHP, no alert here)
+      document.querySelector('.contact-form').addEventListener('submit', e => {
+        // Let PHP handle submission; remove preventDefault to allow form submission
+      });
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = anchor.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            navMenu.classList.remove('active');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DRISHTI",
+      "url": "https://example.com",
+      "logo": "https://example.com/logo.png",
+      "description": "Professional video editing services including commercial edits, music videos, and wedding films.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-555-123-4567",
+        "contactType": "Customer Service",
+        "email": "hello@drishti.com"
+      }
+    }
+  </script>
+</body>
+</html>
